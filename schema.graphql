@@ -1,0 +1,33 @@
+type Query {
+  me: User
+  cart: Cart
+  dataContent: [DataContent]
+  products(id: Int, type: String): [Product]
+}
+
+type User {
+  id: ID
+  name: String
+  email: String
+}
+
+type Cart {
+  id: Int
+  quantity: Int
+  total: Int
+}
+
+type DataContent {
+  id: Int
+  name: String
+  copy: String
+  description: String
+}
+
+type Product {
+  id: Int
+  type: String
+  price: String
+  colour: String
+  size: String
+}
