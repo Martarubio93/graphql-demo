@@ -1,0 +1,22 @@
+{
+  allProducts: products {
+    ...ProductFields
+  }
+   alltshirts: products(type: "t-shirt", id: 1) {
+    ...ProductFields
+  }
+  
+  allhoodies: products(type: "hoodie"){
+    ...ProductFields
+  }
+}
+
+
+
+fragment ProductFields on Product {
+  id
+  type
+  price
+  colour
+  size
+  }

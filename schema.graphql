@@ -1,7 +1,7 @@
 type Query {
   me: User
   cart: Cart
-  dataContent: [DataContent]
+  dataContent(id: Int, name: String): [DataContent]
   products(id: Int, type: String): [Product]
 }
 
@@ -14,7 +14,7 @@ type User {
 type Cart {
   id: Int
   quantity: Int
-  total: Int
+  total: Float
 }
 
 type DataContent {
