@@ -1,3 +1,5 @@
+scalar Date
+
 interface Item {
   id: ID!
   name: String!
@@ -15,6 +17,7 @@ type User {
   id: ID
   name: String
   email: String
+  createAt: Date
 }
 
 type Cart {
@@ -45,3 +48,5 @@ type Mutation {
   createProduct(type: String!, price: String!, colour: String!, size: String): Product
   updateProductPrice(id: Int!, price: String!): Product
 }
+
+

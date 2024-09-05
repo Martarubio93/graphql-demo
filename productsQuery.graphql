@@ -117,3 +117,15 @@ mutation {
     }
   }
 }
+
+# query to get all queries in the schema
+
+{
+  __schema {
+    queryType {
+      fields {
+        name
+      }
+    }
+  }
+}
