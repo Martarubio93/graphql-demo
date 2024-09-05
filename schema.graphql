@@ -1,8 +1,14 @@
+interface Item {
+  id: ID!
+  name: String!
+}
+
 type Query {
   me: User
   cart: Cart
   dataContent(id: Int, name: String): [DataContent]
   products(id: Int, type: String): [Product]
+  items: [Item]
 }
 
 type User {
@@ -17,9 +23,9 @@ type Cart {
   total: Float
 }
 
-type DataContent {
-  id: Int
-  name: String
+type DataContent implements Item {
+  id: ID!
+  name: String!
   copy: String
   description: String
 }
@@ -31,6 +37,7 @@ type Product {
   colour: String
   size: String
 }
+
 
 # Multiple Mutation to create new product, accept arguments for type, price, colour and size. Return 'Product' the new product.
 # Mutation to update the price of a product, accept arguments for id and price. Return 'Product' the updated product.

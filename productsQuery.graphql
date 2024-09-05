@@ -108,3 +108,12 @@ mutation {
   }
 }
 
+# query to get all types in the schema
+
+{
+  __schema {
+    types {
+      name
+    }
+  }
+}
