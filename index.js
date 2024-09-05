@@ -25,7 +25,22 @@ const products = [
   { id: 4, type: "t-shirt", price: "18", colour: "yellow", size: "S" },
 ];
 
+let nextId = 5;
+
 const root = {
+  createProduct: ({ type, price, colour, size }) => {
+    const newProduct = { id: nextId++, type, price, colour, size };
+    products.push(newProduct);
+    return newProduct;
+  },
+  updateProductPrice: ({id, price}) => {
+    const product = products.find((product) => product.id === id);
+    if (!product){
+      throw new Error('Product not found');
+    }
+    product.price = price;
+    return product;
+  },
   me: () => {
     return {
       id: 1,
@@ -59,7 +74,9 @@ const root = {
     }
     // if arguments are passed, return the product with the id and type that we passed as arguments
     return products.filter(
-      (product) => (!args.id || product.id === args.id) && (!args.type || product.type === args.type)
+      (product) =>
+        (!args.id || product.id === args.id) &&
+        (!args.type || product.type === args.type)
     );
   },
 };

@@ -31,3 +31,10 @@ type Product {
   colour: String
   size: String
 }
+
+# Multiple Mutation to create new product, accept arguments for type, price, colour and size. Return 'Product' the new product.
+# Mutation to update the price of a product, accept arguments for id and price. Return 'Product' the updated product.
+type Mutation {
+  createProduct(type: String!, price: String!, colour: String!, size: String): Product
+  updateProductPrice(id: Int!, price: String!): Product
+}

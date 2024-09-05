@@ -1,3 +1,15 @@
+
+# fragment is a reusable piece of query
+
+
+fragment ProductFields on Product {
+  id
+  type
+  price
+  colour
+  size
+}
+
 {
   allProducts: products {
     ...ProductFields
@@ -12,6 +24,7 @@
 }
 
 
+# query using a fragment, variables and operation name
 
 fragment ProductFields on Product {
   id
@@ -19,4 +32,79 @@ fragment ProductFields on Product {
   price
   colour
   size
+}
+
+query GetProducts($productType: String, $productId: Int) {
+  allProducts: products {
+    ...ProductFields
   }
+  alltshirts: products(type: $productType, id: $productId) {
+    ...ProductFields
+  }
+  allhoodies: products(type: "hoodie") {
+    ...ProductFields
+  }
+}
+
+# Query using variable default values
+fragment ProductFields on Product {
+  id
+  type
+  price
+  colour
+  size
+}
+
+query GetProducts($productType: String = "t-shirt", $productId: Int = 1) {
+  allProducts: products {
+    ...ProductFields
+  }
+  alltshirts: products(type: $productType, id: $productId) {
+    ...ProductFields
+  }
+  allhoodies: products(type: "hoodie") {
+    ...ProductFields
+  }
+}
+
+# Query using variable default values, include and skip directives
+# $includeTshirts: Boolean = true (include tshirts), $skipHoodies: Boolean = false (Exclude hoodies)
+fragment ProductFields on Product {
+  id
+  type
+  price
+  colour
+  size
+}
+
+query GetProducts($productType: String = "t-shirt", $productId: Int = 2, $includeTshirts: Boolean = true, $skipHoodies: Boolean = false) {
+  allProducts: products {
+    ...ProductFields
+  }
+  alltshirts: products(type: $productType, id: $productId) @include(if: $includeTshirts) {
+    ...ProductFields
+  }
+  allhoodies: products(type: "hoodie") @skip(if: $skipHoodies) {
+    ...ProductFields
+  }
+}
+
+# multiple mutation
+
+mutation {
+  createProduct(type: "hat", price: "12", colour: "black", size: "M") {
+    id
+    type
+    price
+    colour
+    size
+  }
+  updateProductPrice(id: 1, price: "10") {
+    id
+    type
+    price
+    colour
+    size
+  }
+}
+
